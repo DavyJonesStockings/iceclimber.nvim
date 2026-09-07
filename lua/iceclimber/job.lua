@@ -34,7 +34,7 @@ function M.start(on_ready)
     return
   end
 
-  local bin = M.binary_path()
+  local bin = require("iceclimber.install").binary_path()
 
   job = vim.system({ bin }, {
     stdout = function(err, data)
