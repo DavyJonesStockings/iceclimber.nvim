@@ -1,0 +1,6 @@
+// .luarc.json — silences vim global warnings in lua_ls
+{
+  "runtime": { "version": "LuaJIT" },
+  "diagnostics": { "globals": ["vim"] },
+  "workspace": { "checkThirdParty": false }
+}
