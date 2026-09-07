@@ -1,9 +1,15 @@
 if vim.g.loaded_my_plugin then return end
 vim.g.loaded_my_plugin = true
 
-vim.api.nvim_create_user_command("IceClimberStart", function()
-  require("iceclimber").start()
-end, {})
+vim.api.nvim_create_user_command("IceClimberStart", function(input)
+  local is_debug = input.fargs[1] -- nil if nothing was passed
+  require("iceclimber").start({ debug = is_debug })
+end, {
+  nargs = "?",
+  complete = function()
+    return { "debug" }
+  end,
+})
 
 vim.api.nvim_create_user_command("IceClimberStop", function()
   require("iceclimber").stop()
