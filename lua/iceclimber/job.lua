@@ -28,15 +28,19 @@ function M.binary_path()
   return "iceclimber" -- fall back to $PATH
 end
 
-function M.start(on_ready)
+function M.start(on_ready, opts)
   if job ~= nil then
     vim.notify("iceclimber already running", vim.log.levels.WARN)
     return
   end
 
-  local bin = require("iceclimber.install").binary_path()
+  opts = opts or {}
 
-  job = vim.system({ bin }, {
+  local bin = M.binary_path()
+  local cmd = { bin }
+  if opts.debug then table.insert(cmd, "--debug_overlay=true") end
+
+  job = vim.system(cmd, {
     stdout = function(err, data)
       if err then
         vim.schedule(function()
