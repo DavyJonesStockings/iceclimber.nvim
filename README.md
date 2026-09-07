@@ -1,16 +1,52 @@
 # iceclimber.nvim
 Neovim plugin side of iceclimber.nvim
 
-# installtion
-vim.pack installation:
+# installation
+<details>
+<summary>vim.pack</summary>
+<br>
+
 ```lua
 vim.pack.add({
     "https://github.com/DavyJonesStockings/iceclimber.nvim",
 })
 require("iceclimber").setup({})
 ```
+</details>
 
-once that's added, do `:source $MYVIMRC` and then also reload your terminal session. this will automatically check for and install the golang binary from [this repository](https://github.com/DavyJonesStockings/iceclimber)
+<details>
+<summary>lazy.nvim</summary>
+<br>
+
+```lua
+require("lazy").setup({
+  {
+    "DavyJonesStockings/iceclimber.nvim",
+    config = function()
+      require("iceclimber").setup({})
+    end,
+  },
+})
+```
+</details>
+
+<details>
+<summary>packer.nvim</summary>
+<br>
+
+```lua
+require("packer").startup(function(use)
+  use {
+    "DavyJonesStockings/iceclimber.nvim",
+    config = function()
+      require("iceclimber").setup({})
+    end,
+  }
+end)
+```
+</details>
+
+once that's added, do `:source $MYVIMRC` and then also reload your terminal session. this will automatically check for and install the golang binary from [this repository](https://github.com/DavyJonesStockings/iceclimber).
 
 # usage
 
