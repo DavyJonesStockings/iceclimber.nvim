@@ -90,7 +90,7 @@ end
 function M.ensure()
   if M.installed() then return true end
 
-  M.install_latest()
+  M.install_latest_release()
 end
 
 return M
