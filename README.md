@@ -51,5 +51,9 @@ once that's added, do `:source $MYVIMRC` and then also reload your terminal sess
 # usage
 
 `:IceClimberStart` to start the program.
+
 `h` and `l` to move left and right, `<space>` to jump. `q` to quit.
+
+the plugin checks if the binary is installed, but it does not check version. if you wish to update to the latest version of the binary as found [here](https://github.com/DavyJonesStockings/iceclimber), you can run `:IceClimberUpdate`
+
 `:IceClimberStop` and `:IceClimberStatus` exist in the event that you lose control of the sprite overlay and it gets stuck on your screen. if you end up needing to use these, let me know and file an issue.
