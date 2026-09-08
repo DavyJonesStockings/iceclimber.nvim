@@ -71,8 +71,6 @@ function M.install_latest_release()
     local release = fetch_latest_release()
     local asset = find_asset(release)
 
-    print(asset)
-
     run({ "curl", "-fsSL", "-o", M.binary_path(), asset.browser_download_url })
     vim.uv.fs_chmod(M.binary_path(), 493) -- 0755
   end)
