@@ -5,6 +5,17 @@ local job = nil -- vim.SystemObj handle
 
 local log_path = vim.fn.stdpath("cache") .. "/iceclimber.log"
 
+local data_dir = vim.fn.stdpath("data") .. "/iceclimber"
+local bin_dir = data_dir .. "/bin"
+
+local function binary_name()
+  return "iceclimber"
+end
+
+function M.binary_path()
+  return bin_dir .. "/" .. binary_name()
+end
+
 local function append_log(line)
   local fd = io.open(log_path, "a")
   if fd then
@@ -13,20 +24,9 @@ local function append_log(line)
   end
 end
 
-local function plugin_root()
-  local str = debug.getinfo(1, "S").source:sub(2)
-  return vim.fn.fnamemodify(str, ":h:h:h") -- up from lua/iceclimber/job.lua
-end
-
 vim.api.nvim_create_user_command("IceClimberLog", function()
   vim.cmd("tabnew " .. log_path)
 end, {})
-
-function M.binary_path()
-  local dev_path = plugin_root() .. "/../iceclimber" -- Go project root
-  if vim.fn.executable(dev_path) == 1 then return dev_path end
-  return "iceclimber" -- fall back to $PATH
-end
 
 function M.start(on_ready, opts)
   if job ~= nil then
@@ -37,6 +37,10 @@ function M.start(on_ready, opts)
   opts = opts or {}
 
   local bin = M.binary_path()
+  if not require("iceclimber.install").installed() then
+    vim.notify("Go binary is not installed; installing latest release now.")
+    require("iceclimber.install").install_latest_release()
+  end
   local cmd = { bin }
   if opts.debug then table.insert(cmd, "--debug_overlay=true") end
 

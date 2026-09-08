@@ -62,9 +62,7 @@ local function find_asset(release)
   )
 end
 
-function M.ensure()
-  if M.installed() then return true end
-
+function M.install_latest_release()
   vim.notify("Installing iceclimber binary...")
 
   local ok, err = pcall(function()
@@ -72,6 +70,8 @@ function M.ensure()
 
     local release = fetch_latest_release()
     local asset = find_asset(release)
+
+    print(asset)
 
     run({ "curl", "-fsSL", "-o", M.binary_path(), asset.browser_download_url })
     vim.uv.fs_chmod(M.binary_path(), 493) -- 0755
@@ -84,6 +84,13 @@ function M.ensure()
 
   vim.notify("iceclimber installed successfully")
   return true
+end
+
+-- wrapper around install_latest that can be checked on startup
+function M.ensure()
+  if M.installed() then return true end
+
+  M.install_latest()
 end
 
 return M

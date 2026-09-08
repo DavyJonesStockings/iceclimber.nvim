@@ -7,6 +7,8 @@ M.config = {
 
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
+
+  require("iceclimber.install").ensure()
 end
 
 function M.start(opts)

@@ -24,6 +24,12 @@ vim.api.nvim_create_user_command("IceClimberStatus", function()
   vim.notify("iceclimber running: " .. tostring(running))
 end, {})
 
+vim.api.nvim_create_user_command("IceClimberUpdate", function()
+  if require("iceclimber.install").update() then
+    vim.notify("iceclimber updated successfully!", vim.log.levels.INFO)
+  end
+end, {})
+
 vim.api.nvim_create_autocmd("VimLeavePre", {
   group = vim.api.nvim_create_augroup("IceClimberCleanup", { clear = true }),
   callback = function()
