@@ -25,7 +25,7 @@ vim.api.nvim_create_user_command("IceClimberStatus", function()
 end, {})
 
 vim.api.nvim_create_user_command("IceClimberUpdate", function()
-  if require("iceclimber.install").update() then
+  if require("iceclimber.install").install_latest_release() then
     vim.notify("iceclimber updated successfully!", vim.log.levels.INFO)
   end
 end, {})

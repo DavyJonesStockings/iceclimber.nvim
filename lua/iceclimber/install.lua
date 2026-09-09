@@ -84,7 +84,7 @@ function M.install_latest_release()
   return true
 end
 
--- wrapper around install_latest that can be checked on startup
+-- wrapper around install_latest_release that can be checked on startup
 function M.ensure()
   if M.installed() then return true end
 
