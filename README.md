@@ -1,6 +1,16 @@
 # iceclimber.nvim
 Neovim plugin side of iceclimber.nvim
 
+currently only works on Hyprland. sorry! more support to come in the future.
+
+`h` left `l` right `<space>` jump `q` quit
+
+[![demo](https://github.com/DavyJonesStockings/iceclimber/raw/main/demo.gif)](/DavyJonesStockings/iceclimber/blob/main/demo.gif)
+
+## requirements
+
+please see [iceclimber](https://github.com/DavyJonesStockings/iceclimber.nvim) for requirements of the binary.
+
 # installation
 <details>
 <summary>vim.pack</summary>
@@ -55,5 +65,7 @@ once that's added, do `:source $MYVIMRC` and then also reload your terminal sess
 `h` and `l` to move left and right, `<space>` to jump. `q` to quit.
 
 the plugin checks if the binary is installed, but it does not check version. if you wish to update to the latest version of the binary as found [here](https://github.com/DavyJonesStockings/iceclimber), you can run `:IceClimberUpdate`
+
+in general, the binary will be backwards compatible with the neovim plugin, **not vice versa**. this means that you should be able to safely use an updated binary with an outdated iceclimber.nvim, but an updated iceclimber.nvim will not necessarily work with outdated binary.
 
 `:IceClimberStop` and `:IceClimberStatus` exist in the event that you lose control of the sprite overlay and it gets stuck on your screen. if you end up needing to use these, let me know and file an issue.
