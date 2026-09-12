@@ -1,10 +1,10 @@
--- lua/iceclimber/job.lua
 local M = {}
 
 local job = nil -- vim.SystemObj handle
 
-local log_path = vim.fn.stdpath("cache") .. "/iceclimber.log"
+local config = require("iceclimber.config")
 
+local log_path = vim.fn.stdpath("cache") .. "/iceclimber.log"
 local data_dir = vim.fn.stdpath("data") .. "/iceclimber"
 local bin_dir = data_dir .. "/bin"
 
@@ -13,7 +13,11 @@ local function binary_name()
 end
 
 function M.binary_path()
-  return bin_dir .. "/" .. binary_name()
+  if config.options.binary == "default" then
+    return bin_dir .. "/" .. binary_name()
+  else
+    return config.options.binary
+  end
 end
 
 local function append_log(line)
@@ -37,8 +41,9 @@ function M.start(on_ready, opts)
   opts = opts or {}
 
   local bin = M.binary_path()
+  print(bin)
   if not require("iceclimber.install").installed() then
-    vim.notify("Go binary is not installed; installing latest release now.")
+    vim.notify("Go binary not found; installing latest release now.")
     require("iceclimber.install").install_latest_release()
   end
   local cmd = { bin }

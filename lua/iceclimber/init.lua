@@ -1,13 +1,9 @@
--- lua/my-plugin/init.lua
 local M = {}
 
-M.config = {
-  greeting = "hello from iceclimber",
-}
+M.config = {}
 
 function M.setup(opts)
-  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
-
+  require("iceclimber.config").setup(opts)
   require("iceclimber.install").ensure()
 end
 
@@ -43,10 +39,6 @@ end
 function M.stop()
   require("iceclimber.job").stop()
   require("iceclimber.ui_lockdown").disable()
-end
-
-function M.say_hello()
-  vim.notify(M.config.greeting)
 end
 
 return M
