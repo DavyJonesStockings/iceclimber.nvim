@@ -9,7 +9,7 @@ currently only works on Hyprland. sorry! more support to come in the future.
 
 ## requirements
 
-please see [iceclimber](https://github.com/DavyJonesStockings/iceclimber.nvim) for requirements of the binary.
+please see [iceclimber](https://github.com/DavyJonesStockings/iceclimber) for requirements of the binary.
 
 # installation
 <details>
