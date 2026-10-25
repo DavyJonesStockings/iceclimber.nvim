@@ -19,12 +19,19 @@ local function get_visible_state()
     local top = vim.fn.line("w0", target_win)
     local bot = vim.fn.line("w$", target_win)
     local raw_lines = vim.api.nvim_buf_get_lines(target_buf, top - 1, bot, false)
-    local view = vim.api.nvim_win_call(target_win, vim.fn.winsaveview)
+    local info = vim.fn.getwininfo(target_win)[1]
+    local text_width = info.width - info.textoff
 
+    local view
     local lines = {}
-    for i, text in ipairs(raw_lines) do
-        lines[i] = { text = text, width = vim.fn.strdisplaywidth(text) }
-    end
+    -- strdisplaywidth depends on the current buffer's tabstop, so run it in the target window
+    vim.api.nvim_win_call(target_win, function()
+        view = vim.fn.winsaveview()
+        for i, text in ipairs(raw_lines) do
+            local full = vim.fn.strdisplaywidth(text)
+            lines[i] = { width = math.max(0, math.min(full - view.leftcol, text_width)) }
+        end
+    end)
 
     return {
         type = events.event.state,
