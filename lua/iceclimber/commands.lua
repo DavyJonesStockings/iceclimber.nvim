@@ -7,6 +7,12 @@ local handlers = {
     scroll_right = function(cmd)
         vim.cmd("normal! " .. (cmd.count or 1) .. "zl")
     end,
+    scroll_up = function(cmd)
+        vim.cmd("normal! " .. (cmd.count or 1) .. vim.keycode("<C-E>"))
+    end,
+    scroll_down = function(cmd)
+        vim.cmd("normal! " .. (cmd.count or 1) .. vim.keycode("<C-Y>"))
+    end,
     cursor_move = function(cmd)
         vim.api.nvim_win_set_cursor(0, { cmd.line, cmd.col })
     end,
